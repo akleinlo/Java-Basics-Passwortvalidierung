@@ -2,16 +2,11 @@ package org.example;
 
 public class PasswordValidator {
     public static boolean hasMinLength(String password, int min) {
-        if (password == null || password.isEmpty()) {
-            throw new IllegalArgumentException("Password must not be empty");
-        }
         return password.length() >= min;
     }
 
 
     public static boolean containsDigit(String password) {
-        if (password == null || password.isEmpty()) return false;
-
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
             if (c >= '0' && c <= '9') {
@@ -68,14 +63,12 @@ public class PasswordValidator {
     // Optional Overview
     // uses the above checks
     public static boolean isValid(String password) {
-        if (hasMinLength(password, 8) &&
+        if (password == null || password.isEmpty()) return false;
+
+        return hasMinLength(password, 8) &&
             containsDigit(password) &&
             containsUpperAndLower(password) &&
             !isCommonPassword(password) &&
-            containsSpecialChar(password, "!\"§$%&/()=")) {
-            return true;
+            containsSpecialChar(password, "^°*+#'-_.:,;!\"§$%&/()=");
         }
-        return false;
     }
-
-}
