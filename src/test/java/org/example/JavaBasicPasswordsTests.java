@@ -165,6 +165,7 @@ public class JavaBasicPasswordsTests {
         assertEquals(expected, actual);
     }
 
+
     @Test
     void isValid_shouldReturnFalse_whenStringHas7Characters() {
         // GIVEN
@@ -176,9 +177,9 @@ public class JavaBasicPasswordsTests {
     }
 
     @Test
-    void isValid_shouldReturnFalse_whenStringDoesntContainsDigits() {
+    void isValid_shouldReturnFalse_whenStringDoesntContainsUppercaseAndLowercase() {
         // GIVEN
-        String password = "Aa!bT§wZ";
+        String password = "123!456§27";
         // WHEN
         boolean actual = PasswordValidator.isValid(password);
         // THEN
@@ -186,9 +187,9 @@ public class JavaBasicPasswordsTests {
     }
 
     @Test
-    void isValid_shouldReturnFalse_whenStringDoesntContainUppercase() {
+    void isValid_shouldReturnFalse_whenStringDoesntContainUppercaseAndDigit() {
         // GIVEN
-        String password = "1aa!b5t§2w";
+        String password = "aaa!bbt§cw";
         // WHEN
         boolean actual = PasswordValidator.isValid(password);
         // THEN
@@ -196,9 +197,9 @@ public class JavaBasicPasswordsTests {
     }
 
     @Test
-    void isValid_shouldReturnFalse_whenStringDoesntContainLowercase() {
+    void isValid_shouldReturnFalse_whenStringDoesntContainUppercaseAndSpecialChar() {
         // GIVEN
-        String password = "1AA!B5T§2W";
+        String password = "1aa2b5t32w";
         // WHEN
         boolean actual = PasswordValidator.isValid(password);
         // THEN
@@ -206,15 +207,31 @@ public class JavaBasicPasswordsTests {
     }
 
     @Test
-    void isValid_shouldReturnFalse_whenStringDoesntContainSpecialChar() {
+    void isValid_shouldReturnFalse_whenStringDoesntContainLowercaseAndDigit() {
         // GIVEN
-        String password = "1Aab5T2w";
+        String password = "%AAB&T/W";
         // WHEN
         boolean actual = PasswordValidator.isValid(password);
         // THEN
         assertFalse(actual);
     }
 
+    @Test
+    void isValid_shouldReturnFalse_whenStringDoesntContainLowercaseAndSpecialChar() {
+        // GIVEN
+        String password = "1AA2B5T32W";
+        // WHEN
+        boolean actual = PasswordValidator.isValid(password);
+        // THEN
+        assertFalse(actual);
+    }
 
-
+    @Test
+    void isValid_shouldReturnFalse_whenStringDoesntContainDigitAndSpecialChar() {
+        String password = "AAabbcTxyw";
+        // WHEN
+        boolean actual = PasswordValidator.isValid(password);
+        // THEN
+        assertFalse(actual);
+    }
 }

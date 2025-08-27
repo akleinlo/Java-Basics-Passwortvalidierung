@@ -11,8 +11,8 @@ public class PasswordValidator {
             char c = password.charAt(i);
             if (c >= '0' && c <= '9') {
                 return true;
-                }
             }
+        }
         return false;
     }
 
@@ -65,10 +65,36 @@ public class PasswordValidator {
     public static boolean isValid(String password) {
         if (password == null || password.isEmpty()) return false;
 
-        return hasMinLength(password, 8) &&
-            containsDigit(password) &&
-            containsUpperAndLower(password) &&
-            !isCommonPassword(password) &&
-            containsSpecialChar(password, "^°*+#'-_.:,;!\"§$%&/()=");
+        // password has to have at least one letter
+        boolean containsLetter = false;
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if ((c >= 'A' && c <= 'Z') ||(c >= 'a' && c <= 'z')) {
+                containsLetter = true;
+                break;
+            }
         }
+        if (!containsLetter) return false;
+
+        // hasMinLength must always be true,
+        int min = 8; // password must have at least 8 characters
+        if (!hasMinLength(password, min)) return false;
+
+        // Password is valid if at least 3 of 4 criteria are met
+        int counter = 0;
+        if (containsDigit(password)) {
+            counter++;
+        }
+        if (containsUpperAndLower(password)) {
+            counter++;
+        }
+        if (!isCommonPassword(password)) {
+            counter++;
+        }
+        String allowed = "^°*+#'-_.:,;!\\\"§$%&/()=";
+        if (containsSpecialChar(password, allowed)) {
+            counter++;
+        }
+        return counter >= 3;
     }
+}
