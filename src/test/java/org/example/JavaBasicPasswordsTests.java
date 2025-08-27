@@ -20,9 +20,9 @@ public class JavaBasicPasswordsTests {
     }
 
     @Test
-    void containsDigit_shouldReturnTrue_whenStringIsA1() {
+    void containsDigit_shouldReturnTrue_whenStringIs1() {
         // GIVEN
-        String password = "A1";
+        String password = "1";
         boolean expected = true;
 
         // WHEN
@@ -43,7 +43,46 @@ public class JavaBasicPasswordsTests {
 
         // THEN
         assertEquals(expected, actual);
+    }
 
+    @Test
+    void isCommonPassword_shouldReturnTrue_whenStringIs123456789() {
+        // GIVEN
+        String password = "123456789";
+        boolean expected = true;
+
+        // WHEN
+        boolean actual = PasswordValidator.isCommonPassword(password);
+
+        // THEN
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void containsSpecialCharacter_shouldReturnTrue_whenStringContainsSpecialChar() {
+        // GIVEN
+        String password = "!";
+        String allowed = "!\"§";
+        boolean expected = true;
+
+        // WHEN
+        boolean actual = PasswordValidator.containsSpecialChar(password, allowed);
+
+        // THEN
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void isValid_shouldReturnTrue_whenChecksAboveAreCombined() {
+        // GIVEN
+        String password = "1Aa!b5T§2w";
+        boolean expected = true;
+
+        // WHEN
+        boolean actual = PasswordValidator.isValid(password);
+
+        // THEN
+        assertEquals(expected, actual);
     }
 
 
