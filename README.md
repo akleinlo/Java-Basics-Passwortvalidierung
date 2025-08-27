@@ -7,11 +7,12 @@ A Java Program to generate passwords according to a given security policy
 – IntelliJ (optional)
 
 # Password Policy
-– Minimum 8 characters<br>
-– At least one digit (0–9)<br>
-– Uppercase and lowercase letters required<br>
-– Must not be one of the following passwords (case-insensitive): "password", "Passwort1", "123456789", "Hallo"
+1. ** Minimum Requirements **
+– Minimum 8 characters
+– Must contain at least one letter (lowercase or uppercase)
 
-# Bonus-Policy
-– At least one special character (allowed: ^°*+#'-_.:,;!"§$%&/()=)<br>
-– Minimum of 3 out of 4 character groups (uppercase, lowercase, digit, special character)
+2. ** Additional Rules (at least 3 of the following 4 must be met) **
+– At least one digit (0–9)
+– Uppercase and lowercase letters required
+– Must not be one of the following passwords (case-insensitive): `"password"`, `"Passwort1"`, `"123456789"`, `"Hallo"`
+– At least one special character (allowed: ^°*+#'-_.:,;!"§$%&/()=)
